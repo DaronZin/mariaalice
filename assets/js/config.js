@@ -108,6 +108,6 @@ export default {
     // Endereço público FINAL do convite, com https (ex.: 'https://convite.seudominio.com.br/maria-alice/').
     // Usado na prévia do link no WhatsApp (imagem e título). Pode ficar vazio:
     // o convite funciona igual, só a prévia do WhatsApp fica sem imagem.
-    url: '',
+    url: 'https://mariaalice.cloudflare-ftkbd.workers.dev/',
   },
 };
