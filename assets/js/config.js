@@ -74,7 +74,7 @@ export default {
       { inicio: 0.6, fim: 5.0, texto: 'Era uma vez, em uma floresta cheia de encantos…' },
       { inicio: 6.0, fim: 11.0, texto: '…uma menina muito especial.' },
       { inicio: 13.0, fim: 19.5, texto: 'Num dia muito esperado, a floresta inteira se preparou para uma surpresa.' },
-      { inicio: 21.0, fim: 27.0, texto: 'Seu nome era {aniversariante}, e ela ia celebrar seus dois aninhos!' },
+      { inicio: 21.0, fim: 27.0, texto: 'Seu nome é {aniversariante}, e ela vai celebrar seus dois aninhos!' },
       { inicio: 28.0, fim: 33.0, texto: 'Mas faltava uma coisa muito importante… Você!' },
     ],
     // Frase do pássaro ao ser tocado (sem dados do evento).
