@@ -1,0 +1,24 @@
+# Cabeçalhos do Cloudflare Pages (equivalente ao .htaccess usado no Synology).
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
+# O AR Quick Look do iPhone/iPad exige este tipo para o arquivo .usdz.
+/assets/models/maria-alice.usdz
+  Content-Type: model/vnd.usdz+zip
+  Cache-Control: public, max-age=604800
+
+/assets/models/maria-alice.glb
+  Content-Type: model/gltf-binary
+  Cache-Control: public, max-age=604800
+
+# Faz o iPhone oferecer "Adicionar à agenda" ao abrir o arquivo do evento.
+/maria-alice-2-anos.ics
+  Content-Type: text/calendar; charset=utf-8
+
+/assets/fonts/*
+  Cache-Control: public, max-age=604800
+
+/assets/img/*
+  Cache-Control: public, max-age=604800

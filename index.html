@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Maria Alice faz 2 anos | convite</title>
+  <meta name="description" content="Sábado, 28 de novembro, das 18h às 20h. Era uma vez… Abra o convite, conheça a história e confirme sua presença.">
+  <meta name="theme-color" content="#304a39">
+  <meta name="color-scheme" content="light">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="Maria Alice faz 2 anos | convite">
+  <meta property="og:description" content="Sábado, 28 de novembro, das 18h às 20h. Era uma vez… Abra o convite, conheça a história e confirme sua presença.">
+  <meta property="og:image" content="assets/img/og.jpg">
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="preload" href="assets/fonts/henny-penny.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="assets/fonts/im-fell-english-sc.woff" as="font" type="font/woff" crossorigin>
+  <link rel="preload" href="assets/fonts/figtree.woff" as="font" type="font/woff" crossorigin>
+  <link rel="stylesheet" href="assets/css/convite.css">
+  <script>document.documentElement.classList.add('js');
+  // Guarda load/error da miniatura que aconteçam antes de main.js (rede rápida ou falha imediata).
+  addEventListener('load', function (e) { if (e.target && e.target.id === 'miniatura') window.__miniaturaCarregou = true; }, true);
+  addEventListener('error', function (e) { if (e.target && e.target.id === 'miniatura') window.__miniaturaErro = e.detail || {}; }, true);
+  // Rede de segurança: se o script do conto não iniciar (navegador antigo, erro, rede muito lenta),
+  // a página volta ao modo sem JavaScript, com o cartão completo. Se ele iniciar depois, retoma o conto.
+  setTimeout(function () { if (!document.documentElement.classList.contains('conto-pronto')) document.documentElement.classList.remove('js'); }, 10000);</script>
+  <script nomodule>document.documentElement.classList.remove('js');</script>
+  <!-- o conto primeiro: o botão "Entrar no conto" não espera a biblioteca 3D (1 MB) -->
+  <script type="module" src="assets/js/main.js"></script>
+  <script type="module" src="assets/vendor/model-viewer/model-viewer.min.js"></script>
+</head>
+<body>
+  <a class="pular-link" href="#convite">Pular para o convite</a>
+
+  <!-- Controles fixos: pular a introdução e som -->
+  <div class="controles" aria-label="Controles do convite" role="group">
+    <button class="controle controle--pular" id="pular" type="button" hidden>
+      Pular para o convite
+      <svg class="icone" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-chevron-down"/></svg>
+    </button>
+    <div class="som" id="som" role="group" aria-label="Som">
+      <button class="som__musica" id="som-musica" type="button" aria-pressed="false">
+        <svg class="icone som__icone-tocar" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-eighth-notes"/></svg>
+        <svg class="icone som__icone-pausar" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-pause"/></svg>
+        <span class="som__rotulo" id="som-rotulo">Tocar música</span>
+      </button>
+      <button class="som__geral" id="som-geral" type="button" aria-pressed="false" aria-label="Silenciar todo o som">
+        <svg class="icone som__icone-som" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-volume-2"/></svg>
+        <svg class="icone som__icone-mudo" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-volume-x"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <main>
+    <!-- O palco: uma página de livro que vira floresta. Cada .plano tem uma profundidade (data-z). -->
+    <section class="palco" id="palco" aria-labelledby="titulo">
+      <div class="ceu" aria-hidden="true"></div>
+      <div class="mundo" id="mundo">
+        <div class="plano plano--longe" data-z="60" aria-hidden="true"><img src="assets/img/floresta/camada-longe.svg" alt=""></div>
+        <div class="plano plano--raios" data-z="45" aria-hidden="true"></div>
+        <div class="plano plano--meio" data-z="30" aria-hidden="true"><img src="assets/img/floresta/camada-meio.svg" alt=""></div>
+        <div class="plano plano--nevoa" data-z="26" aria-hidden="true"></div>
+        <div class="plano plano--copa-dir" data-z="22" aria-hidden="true"><img src="assets/img/floresta/copa-clareira-dir.svg" alt=""></div>
+        <div class="plano plano--tronco-esq" data-z="21" aria-hidden="true"><img src="assets/img/floresta/tronco-clareira-esq.svg" alt=""></div>
+        <div class="plano plano--tronco-dir" data-z="21" aria-hidden="true"><img src="assets/img/floresta/tronco-clareira-dir.svg" alt=""></div>
+        <div class="plano plano--copa-esq" data-z="22">
+          <img src="assets/img/floresta/copa-clareira-esq.svg" alt="" aria-hidden="true">
+          <button class="animal animal--passaro" id="passaro" type="button" aria-label="Pássaro no galho. Toque para ouvir o recado." disabled>
+            <span class="passaro"><svg class="passaro__desenho" viewBox="0 0 210 180" aria-hidden="true" focusable="false"><g class="p-cauda"><path d="M66 112L24 150C26 160 38 162 46 156L80 124Z" fill="#6E5039" stroke="#4A3424" stroke-width="2.4" stroke-linejoin="round"/><path d="M58 124L36 146" stroke="#8A6646" stroke-width="3" stroke-linecap="round"/></g><g class="p-asa-tras"><path d="M104 94C88 58 66 34 40 26C50 46 60 66 70 86C80 98 94 102 104 94Z" fill="#5A4130" stroke="#4A3424" stroke-width="2.4" stroke-linejoin="round"/><path d="M92 84C78 64 66 50 52 40" stroke="#B5733A" stroke-width="3" fill="none" stroke-linecap="round"/></g><g class="p-pes" stroke="#4A3424" stroke-width="3.2" stroke-linecap="round" fill="none"><path d="M100 146L96 168M96 168L88 170M96 168L102 172"/><path d="M114 146L114 168M114 168L106 170M114 168L120 172"/></g><g class="p-corpo"><path d="M52 108C52 78 84 62 116 66C146 70 160 92 154 118C148 142 120 152 96 150C72 148 52 134 52 108Z" fill="#8A6646" stroke="#4A3424" stroke-width="2.4" stroke-linejoin="round"/><path d="M90 149C120 152 150 138 154 112C156 98 151 88 143 82C131 101 112 120 80 133C82 141 86 147 90 149Z" fill="#F2C230"/><path d="M112 140C130 136 146 124 150 108" stroke="#F8DA6A" stroke-width="6" fill="none" stroke-linecap="round" opacity=".8"/></g><g class="p-asa"><path d="M64 102C72 82 100 76 124 87C133 92 129 105 118 111C100 121 75 123 64 102Z" fill="#6E5039" stroke="#4A3424" stroke-width="2.4" stroke-linejoin="round"/><path d="M72 104C88 112 106 110 118 104" stroke="#B5733A" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M78 96C92 92 104 92 116 96" stroke="#8A6646" stroke-width="2.5" fill="none" stroke-linecap="round"/></g><g class="p-cabeca"><path d="M112 70C108 46 128 30 150 32C172 34 186 50 182 72C178 92 156 98 138 96C122 94 114 84 112 70Z" fill="#FFF8EC" stroke="#4A3424" stroke-width="2.4" stroke-linejoin="round"/><path d="M113 64C112 42 132 28 152 30C170 32 183 44 183 58C168 50 140 48 113 64Z" fill="#2B2420"/><path d="M141 34Q151 29 161 34" stroke="#F2C230" stroke-width="3.5" fill="none" stroke-linecap="round"/><path d="M115 70C136 58 164 58 184 64L184 70C166 66 140 66 116 76Z" fill="#FFFFFF"/><path d="M117 79C137 70 161 70 182 74L181 82C162 78 139 80 119 87Z" fill="#2B2420"/><circle cx="160" cy="77" r="7.4" fill="#FFFFFF"/><circle cx="161" cy="77" r="5" fill="#1E1A17"/><circle cx="163" cy="75" r="1.9" fill="#FFFFFF"/><path class="p-bico" d="M180 72L203 79L180 86Z" fill="#2B2420" stroke="#2B2420" stroke-width="1.5" stroke-linejoin="round"/><ellipse cx="148" cy="90" rx="7" ry="3.6" fill="#F2A3B3" opacity=".45"/></g></svg></span>
+          </button>
+          <p class="recado" id="recado" aria-live="polite"><span>Psiu! Tem festa na floresta!</span></p>
+        </div>
+        <div class="plano plano--chao" data-z="18" aria-hidden="true">
+          <img src="assets/img/floresta/chao.svg" alt="">
+          <span class="pegada" style="--px:53.6%;--py:20.6%;--r:-104deg"><svg class="pegada__desenho" viewBox="0 0 40 34" aria-hidden="true" focusable="false"><g fill="#9C7E52"><ellipse cx="11" cy="9" rx="4.2" ry="8.5"/><ellipse cx="27" cy="9" rx="4.2" ry="8.5"/><circle cx="17" cy="24" r="3.4"/><circle cx="21" cy="31" r="3"/></g></svg></span>
+          <span class="pegada" style="--px:52.1%;--py:22.8%;--r:-112deg"><svg class="pegada__desenho" viewBox="0 0 40 34" aria-hidden="true" focusable="false"><g fill="#9C7E52"><ellipse cx="11" cy="9" rx="4.2" ry="8.5"/><ellipse cx="27" cy="9" rx="4.2" ry="8.5"/><circle cx="17" cy="24" r="3.4"/><circle cx="21" cy="31" r="3"/></g></svg></span>
+          <span class="pegada" style="--px:50.6%;--py:25.3%;--r:-100deg"><svg class="pegada__desenho" viewBox="0 0 40 34" aria-hidden="true" focusable="false"><g fill="#9C7E52"><ellipse cx="11" cy="9" rx="4.2" ry="8.5"/><ellipse cx="27" cy="9" rx="4.2" ry="8.5"/><circle cx="17" cy="24" r="3.4"/><circle cx="21" cy="31" r="3"/></g></svg></span>
+          <span class="pegada" style="--px:48.9%;--py:28.1%;--r:-110deg"><svg class="pegada__desenho" viewBox="0 0 40 34" aria-hidden="true" focusable="false"><g fill="#9C7E52"><ellipse cx="11" cy="9" rx="4.2" ry="8.5"/><ellipse cx="27" cy="9" rx="4.2" ry="8.5"/><circle cx="17" cy="24" r="3.4"/><circle cx="21" cy="31" r="3"/></g></svg></span>
+          <span class="pegada" style="--px:47.2%;--py:31.9%;--r:-106deg"><svg class="pegada__desenho" viewBox="0 0 40 34" aria-hidden="true" focusable="false"><g fill="#9C7E52"><ellipse cx="11" cy="9" rx="4.2" ry="8.5"/><ellipse cx="27" cy="9" rx="4.2" ry="8.5"/><circle cx="17" cy="24" r="3.4"/><circle cx="21" cy="31" r="3"/></g></svg></span>
+        </div>
+        <div class="plano plano--luz" data-z="18.5" aria-hidden="true"></div>
+        <div class="plano plano--modelo" data-z="18">
+          <model-viewer
+            id="miniatura"
+            class="miniatura"
+            src="assets/models/maria-alice.glb?title=Maria%20Alice%20faz%202%20anos#checkoutTitle=Maria%20Alice%20faz%202%20anos&amp;checkoutSubtitle=S%C3%A1bado%2C%2028%20de%20novembro%2C%20%C3%A0s%2018h&amp;callToAction=Confirmar%20presen%C3%A7a"
+            ios-src="assets/models/maria-alice.usdz#checkoutTitle=Maria%20Alice%20faz%202%20anos&amp;checkoutSubtitle=S%C3%A1bado%2C%2028%20de%20novembro%2C%20%C3%A0s%2018h&amp;callToAction=Confirmar%20presen%C3%A7a"
+            alt="Miniatura 3D da Maria Alice: menina de cabelo castanho cacheado e vestido verde-sálvia, em pé na clareira da floresta."
+            ar
+            ar-modes="scene-viewer quick-look"
+            ar-placement="floor"
+            ar-scale="auto"
+            camera-controls
+            disable-pan
+            disable-tap
+            disable-zoom
+            touch-action="pan-y"
+            interaction-prompt="none"
+            camera-orbit="0deg 82deg 0.7m"
+            min-camera-orbit="auto 35deg 0.28m"
+            max-camera-orbit="auto 100deg 0.9m"
+            camera-target="0m 0.143m 0m"
+            field-of-view="30deg"
+            shadow-intensity="1"
+            shadow-softness="0.9"
+            exposure="0.85"
+            tone-mapping="neutral"
+            loading="eager"
+            reveal="auto">
+            <img slot="poster" class="miniatura__poster" src="assets/img/poster.webp" width="763" height="954"
+                 alt="Foto da miniatura 3D da Maria Alice" decoding="async">
+            <div slot="progress-bar" class="miniatura__progresso" aria-hidden="true"><span></span></div>
+            <span slot="ar-button" hidden></span>
+          </model-viewer>
+        </div>
+        <!-- clarão suave em que a Maria Alice aparece (Cena 4) -->
+        <div class="plano plano--aparicao" data-z="18" aria-hidden="true"><span class="aparicao"></span></div>
+        <div class="plano plano--cogumelos" data-z="17" aria-hidden="true"><img src="assets/img/floresta/cogumelos.svg" alt=""></div>
+        <div class="plano plano--coelho" data-z="16">
+          <span class="coelho" id="coelho" aria-hidden="true"><svg class="coelho__desenho" viewBox="0 -24 224 174" aria-hidden="true" focusable="false"><g class="c-corpo"><g class="c-pt c-pt--longe"><path d="M56 80C40 84 36 104 46 114C40 120 26 126 20 130C14 134 18 142 28 140C42 138 60 132 70 124C80 116 82 96 74 86Z" fill="#7D798C" stroke="#5D586A" stroke-width="2.4" stroke-linejoin="round"/></g><g class="c-pf c-pf--longe"><path d="M126 84C122 98 122 112 126 124C128 130 138 132 141 127C142 114 140 100 138 86Z" fill="#7D798C" stroke="#5D586A" stroke-width="2.4" stroke-linejoin="round"/></g><circle cx="36" cy="76" r="13" fill="#FBF8FB" stroke="#5D586A" stroke-width="2.4"/><circle cx="32" cy="72" r="5" fill="#FFFFFF"/><path d="M46 94C28 70 58 44 98 48C128 50 152 56 162 72C170 88 152 104 128 106C100 110 62 112 46 94Z" fill="url(#coelho-pelo)" stroke="#5D586A" stroke-width="2.4" stroke-linejoin="round"/><path d="M70 100C95 104 124 104 146 92C142 101 126 108 100 109C86 109 75 106 70 100Z" fill="#F4F1F6"/><path d="M70 58C88 52 112 52 130 58" stroke="#D2CEDB" stroke-width="5" stroke-linecap="round" fill="none" opacity=".7"/><g class="c-pt"><path d="M62 74C42 76 36 100 48 112C42 118 28 124 22 128C16 132 20 140 30 138C44 136 62 130 72 122C84 112 86 90 76 80Z" fill="url(#coelho-pelo)" stroke="#5D586A" stroke-width="2.4" stroke-linejoin="round"/><path d="M30 136C40 134 52 131 60 127" stroke="#F4F1F6" stroke-width="4" stroke-linecap="round" fill="none"/></g><g class="c-pf"><path d="M134 84C130 99 130 112 135 124C138 131 149 132 151 126C151 113 148 99 146 86Z" fill="#A7A3B4" stroke="#5D586A" stroke-width="2.4" stroke-linejoin="round"/><path d="M137 125C140 129 146 129 149 126" stroke="#F4F1F6" stroke-width="4" stroke-linecap="round" fill="none"/></g><g class="c-cabeca"><g class="c-orelhas"><path d="M152 44C146 24 134 6 120 0C113 -3 110 4 114 10C124 24 136 38 146 50Z" fill="#8A8698" stroke="#5D586A" stroke-width="2.4" stroke-linejoin="round"/><path d="M166 38C164 14 156 -6 144 -16C137 -21 131 -16 134 -8C140 8 148 28 154 44Z" fill="url(#coelho-pelo)" stroke="#5D586A" stroke-width="2.4" stroke-linejoin="round"/><path d="M160 34C158 16 151 0 143 -9C140 -12 137 -9 139 -5C145 8 150 24 153 36Z" fill="#F2B5C4"/></g><path d="M140 62C138 40 158 28 178 32C198 36 210 52 206 68C202 82 186 88 168 86C152 84 141 76 140 62Z" fill="url(#coelho-pelo)" stroke="#5D586A" stroke-width="2.4" stroke-linejoin="round"/><path d="M170 72C176 60 198 60 205 70C207 80 196 87 183 86C174 85 168 80 170 72Z" fill="#FBF8FB"/><ellipse cx="205" cy="64" rx="4.8" ry="3.8" fill="#E8838F" stroke="#5D586A" stroke-width="1.6"/><path d="M203 68Q200 74 194 73" stroke="#5D586A" stroke-width="1.8" fill="none" stroke-linecap="round"/><ellipse cx="183" cy="55" rx="6.2" ry="7.4" fill="#2B2730"/><circle cx="185.5" cy="52" r="2.4" fill="#FFFFFF"/><circle cx="181" cy="59" r="1.1" fill="#FFFFFF" opacity=".8"/><ellipse cx="190" cy="76" rx="5.5" ry="3.2" fill="#F2A3B3" opacity=".55"/></g></g></svg></span>
+          <img class="arbusto" src="assets/img/floresta/arbusto.svg" alt="" aria-hidden="true">
+          <button class="animal animal--coelho" id="toque-coelho" type="button" aria-label="Coelho escondido no arbusto. Toque para ver a trilha secreta." disabled></button>
+        </div>
+        <div class="plano plano--flores" data-z="15">
+          <span class="flores" aria-hidden="true"><svg class="flores__desenho" viewBox="0 0 300 220" aria-hidden="true" focusable="false"><path d="M12.1 211.8C14.1 207.4 15.7 201.6 33.9 198.5C52 195.5 91.1 194.4 121 193.6C150.9 192.7 188.7 191.6 213.5 193.3C238.3 195 256.5 200.1 269.8 203.9C283.2 207.8 294.9 212.1 293.6 216.3C292.3 220.5 280.8 225.6 262.1 228.9C243.5 232.2 211.1 235.1 181.5 236.2C151.9 237.2 111.1 237.2 84.5 235.3C57.8 233.4 33.7 228.7 21.6 224.8C9.6 220.8 10.1 216.2 12.1 211.8Z" fill="#558F36"/><path d="M1.6 214Q-1.3 201.4 -11.2 189.4Q-7 204.4 1.6 214Z" fill="#558F36"/><path d="M4.6 214Q3.9 201.6 -3.7 188.7Q-2.2 203.6 4.6 214Z" fill="#76AF45"/><path d="M7.6 214Q10.6 205.1 7.1 194.4Q4.2 205.2 7.6 214Z" fill="#558F36"/><path d="M10.6 214Q16.4 206.4 16.6 194.9Q10.3 204.4 10.6 214Z" fill="#76AF45"/><path d="M21.2 214Q19.7 205.5 11.7 198.9Q14.2 208.9 21.2 214Z" fill="#558F36"/><path d="M24.2 214Q25 201.8 19 188.4Q18.7 203.1 24.2 214Z" fill="#76AF45"/><path d="M27.2 214Q30.9 203.2 28.3 189.6Q24.5 202.9 27.2 214Z" fill="#558F36"/><path d="M30.2 214Q36.1 205 36.3 192.1Q29.9 203.3 30.2 214Z" fill="#76AF45"/><path d="M39.8 214Q37.1 204.2 27.8 196.2Q31.7 207.8 39.8 214Z" fill="#558F36"/><path d="M42.8 214Q42.4 201.7 35.2 188.7Q36.3 203.5 42.8 214Z" fill="#76AF45"/><path d="M45.8 214Q49.7 203.3 47.3 189.9Q43.3 203 45.8 214Z" fill="#558F36"/><path d="M48.8 214Q54.4 204.9 54.3 192.1Q48.2 203.3 48.8 214Z" fill="#76AF45"/><path d="M57.5 214Q54.8 203 45.5 193Q49.3 206.1 57.5 214Z" fill="#558F36"/><path d="M60.5 214Q61.7 204.3 56.3 193.9Q55.5 205.6 60.5 214Z" fill="#76AF45"/><path d="M63.5 214Q66.4 204.9 62.8 194Q60 205.1 63.5 214Z" fill="#558F36"/><path d="M66.5 214Q72.5 201.6 73 184.8Q66.3 200.2 66.5 214Z" fill="#76AF45"/><path d="M75.9 214Q72.8 202.9 63 193.2Q67.4 206.3 75.9 214Z" fill="#558F36"/><path d="M78.9 214Q80.3 205.9 75.1 197.6Q74.1 207.4 78.9 214Z" fill="#76AF45"/><path d="M81.9 214Q85.5 203.9 82.7 191.4Q79.1 203.7 81.9 214Z" fill="#558F36"/><path d="M84.9 214Q90.6 204.6 90.7 191.4Q84.4 203 84.9 214Z" fill="#76AF45"/><path d="M91.1 214Q86.5 201.3 74.9 189.6Q81.1 204.8 91.1 214Z" fill="#558F36"/><path d="M94.1 214Q94.9 200.9 89 186.2Q88.6 202.1 94.1 214Z" fill="#76AF45"/><path d="M97.1 214Q100 199.9 96.4 182.8Q93.6 200 97.1 214Z" fill="#558F36"/><path d="M100.1 214Q107.7 201.8 110.3 184.5Q101.7 199.7 100.1 214Z" fill="#76AF45"/><path d="M111.8 214Q107.4 201 96.1 188.8Q102 204.4 111.8 214Z" fill="#558F36"/><path d="M114.8 214Q115.3 204.4 109.1 194.6Q109.2 206.2 114.8 214Z" fill="#76AF45"/><path d="M117.8 214Q121.3 204.8 118.5 193.2Q114.9 204.5 117.8 214Z" fill="#558F36"/><path d="M120.8 214Q127.5 204.6 129 190.6Q121.5 202.4 120.8 214Z" fill="#76AF45"/><path d="M126.9 214Q125.2 204.1 116.7 195.5Q119.5 207.2 126.9 214Z" fill="#558F36"/><path d="M129.9 214Q129.4 199 121.8 182.5Q123.2 200.6 129.9 214Z" fill="#76AF45"/><path d="M132.9 214Q134.9 197.6 130.1 178.1Q128.5 198.1 132.9 214Z" fill="#558F36"/><path d="M135.9 214Q142.8 203.7 144.4 188.9Q136.7 201.7 135.9 214Z" fill="#76AF45"/><path d="M150 214Q146.8 203.8 137 195.3Q141.5 207.4 150 214Z" fill="#558F36"/><path d="M153 214Q153.2 201.4 146.5 187.8Q146.9 203 153 214Z" fill="#76AF45"/><path d="M156 214Q159.2 201.9 156.1 187.1Q152.8 201.9 156 214Z" fill="#558F36"/><path d="M159 214Q164.6 204 164.5 190.1Q158.3 202.5 159 214Z" fill="#76AF45"/><path d="M163.6 214Q161.9 205.5 153.8 198.9Q156.5 209 163.6 214Z" fill="#558F36"/><path d="M166.6 214Q167.5 202.5 161.7 189.8Q161.2 203.7 166.6 214Z" fill="#76AF45"/><path d="M169.6 214Q173.7 202.9 171.7 188.7Q167.3 202.4 169.6 214Z" fill="#558F36"/><path d="M172.6 214Q178.7 204.9 179.3 191.7Q172.5 203 172.6 214Z" fill="#76AF45"/><path d="M181 214Q177.6 202.6 167.3 192.4Q172.2 206 181 214Z" fill="#558F36"/><path d="M184 214Q182.6 196.7 174 177.4Q176.4 198.4 184 214Z" fill="#76AF45"/><path d="M187 214Q189.8 201.2 186 185.8Q183.4 201.4 187 214Z" fill="#558F36"/><path d="M190 214Q196.7 196.4 197.8 173.5Q190.4 195.2 190 214Z" fill="#76AF45"/><path d="M203.9 214Q201.8 203.7 192.9 194.6Q196.2 206.8 203.9 214Z" fill="#558F36"/><path d="M206.9 214Q207.5 200.6 201.2 185.5Q201.2 201.8 206.9 214Z" fill="#76AF45"/><path d="M209.9 214Q213.4 203 210.5 189.5Q207 202.9 209.9 214Z" fill="#558F36"/><path d="M212.9 214Q218.4 203.3 218.1 188.9Q212.1 202 212.9 214Z" fill="#76AF45"/><path d="M217 214Q214.8 204 206 195.4Q209.3 207.3 217 214Z" fill="#558F36"/><path d="M220 214Q219.9 199 212.9 182.2Q213.7 200.4 220 214Z" fill="#76AF45"/><path d="M223 214Q226.5 203 223.7 189.3Q220.1 202.8 223 214Z" fill="#558F36"/><path d="M226 214Q233.6 201.1 236.2 183.2Q227.6 199.1 226 214Z" fill="#76AF45"/><path d="M235.2 214Q231.2 201.9 220.3 191.1Q225.8 205.4 235.2 214Z" fill="#558F36"/><path d="M238.2 214Q238.2 197.9 231.2 179.5Q231.9 199.1 238.2 214Z" fill="#76AF45"/><path d="M241.2 214Q244.5 203.8 241.3 191.3Q238.1 203.8 241.2 214Z" fill="#558F36"/><path d="M244.2 214Q249.9 205.2 249.9 192.5Q243.7 203.5 244.2 214Z" fill="#76AF45"/><path d="M257.5 214Q255 201.3 245.6 188.8Q249.2 204 257.5 214Z" fill="#558F36"/><path d="M260.5 214Q261.2 203.7 255.1 192.9Q255 205.3 260.5 214Z" fill="#76AF45"/><path d="M263.5 214Q265.8 203.6 261.5 191.4Q259.4 204.1 263.5 214Z" fill="#558F36"/><path d="M266.5 214Q272.4 200.2 272.7 182Q266.1 199 266.5 214Z" fill="#76AF45"/><path d="M272.8 214Q271.1 205.3 263 198.4Q265.7 208.7 272.8 214Z" fill="#558F36"/><path d="M275.8 214Q276.2 203.9 269.9 193.6Q270.1 205.7 275.8 214Z" fill="#76AF45"/><path d="M278.8 214Q281.2 200.3 276.9 183.9Q274.8 200.7 278.8 214Z" fill="#558F36"/><path d="M281.8 214Q288.1 201.7 288.8 185.1Q281.9 200.2 281.8 214Z" fill="#76AF45"/><path d="M288.4 214Q285.3 202.4 275.3 191.8Q279.8 205.6 288.4 214Z" fill="#558F36"/><path d="M291.4 214Q290.6 201.1 282.9 187.5Q284.5 203 291.4 214Z" fill="#76AF45"/><path d="M294.4 214Q298.6 200.2 296.6 182.8Q292.2 199.7 294.4 214Z" fill="#558F36"/><path d="M297.4 214Q303.6 203.2 304.3 188.2Q297.4 201.6 297.4 214Z" fill="#76AF45"/><g class="flor" data-flor="0"><path d="M52 212Q46.1 150.2 25.8 77.3Q34.3 152.5 52 212Z" fill="#4E8A31"/><path d="M52 212Q55.4 161.5 46.2 100.6Q43.4 162.2 52 212Z" fill="#6FA843"/><path d="M52 212Q74.7 153.3 89.7 77.9Q63.2 150 52 212Z" fill="#4E8A31"/><path d="M52 212Q56 152 52.8 101" stroke="#4E8A31" stroke-width="4" fill="none"/><g class="flor__petalas" style="transform-origin:52.8px 101px"><path d="M52.8 101C33 91.4 35.4 68.6 46.2 66.2C57 68.6 59.4 91.4 52.8 101Z" fill="#A57BC9" stroke="#8C63B0" stroke-width="1.4" transform="rotate(-26 52.8 101)"/><path d="M52.8 101C46.2 91.4 48.6 68.6 59.4 66.2C70.2 68.6 72.6 91.4 52.8 101Z" fill="#A57BC9" stroke="#8C63B0" stroke-width="1.4" transform="rotate(26 52.8 101)"/><path d="M52.8 101C39.6 91.4 42 68.6 52.8 66.2C63.6 68.6 66 91.4 52.8 101Z" fill="#C7A0E2" stroke="#8C63B0" stroke-width="1.4" transform="rotate(0 52.8 101)"/><path d="M50.4 89Q52.8 72.2 54 69.8" stroke="#EBDAF7" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/><path d="M52.8 99L52.8 84.2" stroke="#F2B735" stroke-width="3" stroke-linecap="round"/></g></g><g class="flor" data-flor="1"><path d="M118 212Q105.9 148.8 78.4 75.2Q94.4 152.1 118 212Z" fill="#4E8A31"/><path d="M118 212Q127.7 145.8 126.2 64.2Q115.7 145.2 118 212Z" fill="#6FA843"/><path d="M118 212Q137.5 155.7 148.3 83.7Q125.8 152.9 118 212Z" fill="#4E8A31"/><path d="M118 212Q122 141.6 116 81.8" stroke="#4E8A31" stroke-width="4" fill="none"/><g class="flor__petalas" style="transform-origin:116px 81.8px"><path d="M116 81.8C96.2 72.2 98.6 49.4 109.4 47C120.2 49.4 122.6 72.2 116 81.8Z" fill="#A57BC9" stroke="#8C63B0" stroke-width="1.4" transform="rotate(-26 116 81.8)"/><path d="M116 81.8C109.4 72.2 111.8 49.4 122.6 47C133.4 49.4 135.8 72.2 116 81.8Z" fill="#A57BC9" stroke="#8C63B0" stroke-width="1.4" transform="rotate(26 116 81.8)"/><path d="M116 81.8C102.8 72.2 105.2 49.4 116 47C126.8 49.4 129.2 72.2 116 81.8Z" fill="#C7A0E2" stroke="#8C63B0" stroke-width="1.4" transform="rotate(0 116 81.8)"/><path d="M113.6 69.8Q116 53 117.2 50.6" stroke="#EBDAF7" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/><path d="M116 79.8L116 65" stroke="#F2B735" stroke-width="3" stroke-linecap="round"/></g></g><g class="flor" data-flor="2"><path d="M226 212Q219.5 147.3 198.5 70.7Q207.7 149.5 226 212Z" fill="#4E8A31"/><path d="M226 212Q232.2 156.3 226.5 88.2Q220.2 156.3 226 212Z" fill="#6FA843"/><path d="M226 212Q245.9 151.3 257.3 74.2Q234.2 148.7 226 212Z" fill="#4E8A31"/><path d="M226 212Q230 148.8 222.2 95.1" stroke="#4E8A31" stroke-width="4" fill="none"/><g class="flor__petalas" style="transform-origin:222.2px 95.1px"><path d="M222.2 95.1C202.4 85.5 204.8 62.7 215.6 60.3C226.4 62.7 228.8 85.5 222.2 95.1Z" fill="#A57BC9" stroke="#8C63B0" stroke-width="1.4" transform="rotate(-26 222.2 95.1)"/><path d="M222.2 95.1C215.6 85.5 218 62.7 228.8 60.3C239.6 62.7 242 85.5 222.2 95.1Z" fill="#A57BC9" stroke="#8C63B0" stroke-width="1.4" transform="rotate(26 222.2 95.1)"/><path d="M222.2 95.1C209 85.5 211.4 62.7 222.2 60.3C233 62.7 235.4 85.5 222.2 95.1Z" fill="#C7A0E2" stroke="#8C63B0" stroke-width="1.4" transform="rotate(0 222.2 95.1)"/><path d="M219.8 83.1Q222.2 66.3 223.4 63.9" stroke="#EBDAF7" stroke-width="3" fill="none" stroke-linecap="round" opacity=".8"/><path d="M222.2 93.1L222.2 78.3" stroke="#F2B735" stroke-width="3" stroke-linecap="round"/></g></g><g class="flor" data-flor="3"><path d="M172 160Q178 186 170 212" stroke="#4E8A31" stroke-width="3" fill="none"/><g class="flor__petalas" style="transform-origin:172px 160px"><g transform="rotate(0 172 160)"><ellipse cx="172" cy="150.1" rx="3.4" ry="8.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.9" transform="rotate(0 172 160)"/><ellipse cx="172" cy="150.1" rx="3.4" ry="8.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.9" transform="rotate(27.7 172 160)"/><ellipse cx="172" cy="150.1" rx="3.4" ry="8.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.9" transform="rotate(55.4 172 160)"/><ellipse cx="172" cy="150.1" rx="3.4" ry="8.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.9" transform="rotate(83.1 172 160)"/><ellipse cx="172" cy="150.1" rx="3.4" ry="8.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.9" transform="rotate(110.8 172 160)"/><ellipse cx="172" cy="150.1" rx="3.4" ry="8.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.9" transform="rotate(138.5 172 160)"/><ellipse cx="172" cy="150.1" rx="3.4" ry="8.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.9" transform="rotate(166.2 172 160)"/><ellipse cx="172" cy="150.1" rx="3.4" ry="8.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.9" transform="rotate(193.8 172 160)"/><ellipse cx="172" cy="150.1" rx="3.4" ry="8.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.9" transform="rotate(221.5 172 160)"/><ellipse cx="172" cy="150.1" rx="3.4" ry="8.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.9" transform="rotate(249.2 172 160)"/><ellipse cx="172" cy="150.1" rx="3.4" ry="8.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.9" transform="rotate(276.9 172 160)"/><ellipse cx="172" cy="150.1" rx="3.4" ry="8.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.9" transform="rotate(304.6 172 160)"/><ellipse cx="172" cy="150.1" rx="3.4" ry="8.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.9" transform="rotate(332.3 172 160)"/><circle cx="172" cy="160" r="5.1" fill="#F5C343"/><path d="M167.6 161.4A5.1 5.1 0 0 0 176.4 161.4" fill="#DA9A27"/></g></g></g><g class="flor" data-flor="4"><path d="M268 176Q274 202 266 212" stroke="#4E8A31" stroke-width="3" fill="none"/><g class="flor__petalas" style="transform-origin:268px 176px"><g transform="rotate(0 268 176)"><ellipse cx="268" cy="167.3" rx="3" ry="7.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.8" transform="rotate(0 268 176)"/><ellipse cx="268" cy="167.3" rx="3" ry="7.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.8" transform="rotate(27.7 268 176)"/><ellipse cx="268" cy="167.3" rx="3" ry="7.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.8" transform="rotate(55.4 268 176)"/><ellipse cx="268" cy="167.3" rx="3" ry="7.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.8" transform="rotate(83.1 268 176)"/><ellipse cx="268" cy="167.3" rx="3" ry="7.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.8" transform="rotate(110.8 268 176)"/><ellipse cx="268" cy="167.3" rx="3" ry="7.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.8" transform="rotate(138.5 268 176)"/><ellipse cx="268" cy="167.3" rx="3" ry="7.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.8" transform="rotate(166.2 268 176)"/><ellipse cx="268" cy="167.3" rx="3" ry="7.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.8" transform="rotate(193.8 268 176)"/><ellipse cx="268" cy="167.3" rx="3" ry="7.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.8" transform="rotate(221.5 268 176)"/><ellipse cx="268" cy="167.3" rx="3" ry="7.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.8" transform="rotate(249.2 268 176)"/><ellipse cx="268" cy="167.3" rx="3" ry="7.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.8" transform="rotate(276.9 268 176)"/><ellipse cx="268" cy="167.3" rx="3" ry="7.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.8" transform="rotate(304.6 268 176)"/><ellipse cx="268" cy="167.3" rx="3" ry="7.5" fill="#FFFFFF" stroke="#DCE5EC" stroke-width="0.8" transform="rotate(332.3 268 176)"/><circle cx="268" cy="176" r="4.5" fill="#F5C343"/><path d="M264.1 177.2A4.5 4.5 0 0 0 271.9 177.2" fill="#DA9A27"/></g></g></g></svg></span>
+          <span class="borboleta" id="borboleta" aria-hidden="true"><svg class="borboleta__desenho" viewBox="0 0 120 100" aria-hidden="true" focusable="false"><g class="b-asa b-asa--esq"><path d="M62 55C40 58 26 74 34 86C42 96 58 78 60 62Z" fill="#C9ADE4" stroke="#7E58A6" stroke-width="2" stroke-linejoin="round"/><path d="M62 44C44 18 16 14 12 30C8 46 30 56 60 52Z" fill="#B996D9" stroke="#7E58A6" stroke-width="2" stroke-linejoin="round"/><circle cx="28" cy="31" r="6.5" fill="#F2C744"/><circle cx="19" cy="39" r="3" fill="#FFF6E8"/><circle cx="42" cy="74" r="4.2" fill="#F2C744"/><path d="M54 46C42 38 32 40 24 46" stroke="#D9C4EE" stroke-width="2.5" fill="none" stroke-linecap="round"/></g><g class="b-asa b-asa--dir"><path d="M58 55C80 58 94 74 86 86C78 96 62 78 60 62Z" fill="#C9ADE4" stroke="#7E58A6" stroke-width="2" stroke-linejoin="round"/><path d="M58 44C76 18 104 14 108 30C112 46 90 56 60 52Z" fill="#B996D9" stroke="#7E58A6" stroke-width="2" stroke-linejoin="round"/><circle cx="92" cy="31" r="6.5" fill="#F2C744"/><circle cx="101" cy="39" r="3" fill="#FFF6E8"/><circle cx="78" cy="74" r="4.2" fill="#F2C744"/><path d="M66 46C78 38 88 40 96 46" stroke="#D9C4EE" stroke-width="2.5" fill="none" stroke-linecap="round"/></g><ellipse cx="60" cy="58" rx="4.6" ry="19" fill="#4A3424"/><circle cx="60" cy="37" r="6" fill="#4A3424"/><path d="M58 32Q52 16 45 13M62 32Q68 16 75 13" stroke="#4A3424" stroke-width="2" fill="none" stroke-linecap="round"/><circle cx="45" cy="13" r="2.6" fill="#4A3424"/><circle cx="75" cy="13" r="2.6" fill="#4A3424"/></svg></span>
+          <button class="animal animal--flores" id="toque-borboleta" type="button" aria-label="Borboleta nas flores. Toque para ver as flores se abrirem." disabled></button>
+        </div>
+        <!-- Entrada da floresta: só aparece no começo da história e sai de cena com a câmera -->
+        <div class="plano plano--entrada plano--e-tronco-esq" data-z="5.5" data-entrada aria-hidden="true"><img src="assets/img/floresta/tronco-esq.svg" alt=""></div>
+        <div class="plano plano--entrada plano--e-tronco-dir" data-z="5.5" data-entrada aria-hidden="true"><img src="assets/img/floresta/tronco-dir.svg" alt=""></div>
+        <div class="plano plano--entrada plano--e-copa-esq" data-z="5" data-entrada aria-hidden="true"><img src="assets/img/floresta/copa-esq.svg" alt=""></div>
+        <div class="plano plano--entrada plano--e-copa-dir" data-z="5" data-entrada aria-hidden="true"><img src="assets/img/floresta/copa-dir.svg" alt=""></div>
+        <div class="plano plano--entrada plano--e-frente-esq" data-z="4" data-entrada aria-hidden="true"><img src="assets/img/floresta/frente-esq.svg" alt=""></div>
+        <div class="plano plano--entrada plano--e-frente-dir" data-z="4" data-entrada aria-hidden="true"><img src="assets/img/floresta/frente-dir.svg" alt=""></div>
+      </div>
+
+      <div class="particulas" aria-hidden="true">
+        <!-- longe do centro, onde fica o rosto da Maria Alice -->
+        <span class="vagalume" style="--x:12%;--y:58%;--d:0s"></span>
+        <span class="vagalume" style="--x:24%;--y:40%;--d:-2.1s"></span>
+        <span class="vagalume" style="--x:78%;--y:50%;--d:-1.3s"></span>
+        <span class="vagalume" style="--x:88%;--y:36%;--d:-3.4s"></span>
+        <span class="vagalume" style="--x:72%;--y:72%;--d:-0.7s"></span>
+        <span class="vagalume" style="--x:20%;--y:76%;--d:-2.8s"></span>
+        <img class="folha-caindo" src="assets/img/floresta/folha.svg" alt="" style="--x:12%;--d:-1s;--t:13s">
+        <img class="folha-caindo" src="assets/img/floresta/folha.svg" alt="" style="--x:76%;--d:-6s;--t:16s">
+        <img class="folha-caindo" src="assets/img/floresta/folha.svg" alt="" style="--x:90%;--d:-10s;--t:14s">
+      </div>
+
+      <!-- Cena 1: a página do livro. As bordas de papel abrem e a ilustração vira floresta. -->
+      <div class="pagina" id="pagina">
+        <div class="pagina__papel pagina__papel--topo" aria-hidden="true"></div>
+        <div class="pagina__papel pagina__papel--base" aria-hidden="true"></div>
+        <div class="pagina__papel pagina__papel--esq" aria-hidden="true"></div>
+        <div class="pagina__papel pagina__papel--dir" aria-hidden="true"></div>
+        <div class="pagina__janela" aria-hidden="true"></div>
+        <div class="pagina__grao" aria-hidden="true"></div>
+        <header class="abertura" id="abertura">
+            <p class="faixa"><span>Era uma vez…</span></p>
+            <h1 id="titulo" class="abertura__titulo"><span class="abertura__nome">Maria Alice</span> <span class="abertura__idade">faz 2 anos</span></h1>
+            <p class="abertura__data"><time datetime="2026-11-28T18:00-03:00">Sábado, 28 de novembro, às 18h</time></p>
+            <div class="abertura__acoes">
+              <button class="botao botao--vermelho" id="entrar" type="button" hidden>
+                <svg class="icone" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-book-open"/></svg>
+                Entrar no conto
+              </button>
+              <a class="botao botao--linha" id="ver-convite" href="#convite">Ver o convite</a>
+            </div>
+            <p class="abertura__nota" id="abertura-nota" hidden>A história tem som e dura cerca de 30 segundos.</p>
+        </header>
+      </div>
+
+      <p class="conto-legenda" id="conto-legenda" aria-live="polite"></p>
+    </section>
+
+    <!-- Cena 5: o convite. Sem JavaScript, aparece logo abaixo da floresta. -->
+    <section class="cartao" id="convite" aria-labelledby="cartao-titulo" tabindex="-1">
+      <button class="cartao__alca" id="cartao-alca" type="button" aria-expanded="true" aria-controls="cartao-corpo" hidden>
+        <span class="cartao__alca-traco" aria-hidden="true"></span>
+        <span class="cartao__alca-texto">Recolher o convite</span>
+      </button>
+      <header class="cartao__topo">
+        <p class="faixa faixa--cartao"><span>Era uma vez…</span></p>
+        <h2 id="cartao-titulo" class="cartao__titulo"><span class="cartao__nome">Maria Alice</span> <span class="cartao__idade">faz 2 anos</span></h2>
+      </header>
+      <div class="cartao__corpo" id="cartao-corpo">
+        <p class="cartao__convite">Venha comemorar meus 2 anos comigo!</p>
+        <ul class="cartao__info">
+          <li>
+            <svg class="icone" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-calendar-days"/></svg>
+            <span><strong><time datetime="2026-11-28T18:00-03:00">Sábado, 28 de novembro de 2026</time></strong><br>Das 18h às 20h</span>
+          </li>
+          <li>
+            <svg class="icone" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-map-pin"/></svg>
+            <span id="endereco">R. Cel. Virgílio Távora, 376 - Bela Cruz - CE<!--se:complemento--><br><!--fim:complemento--></span>
+          </li>
+        </ul>
+        <div class="cartao__acoes">
+          <a class="botao botao--vermelho botao--largo" id="rsvp-sim" href="https://wa.me/558591919249?text=Ol%C3%A1!%20Confirmo%20minha%20presen%C3%A7a%20na%20festa%20de%202%20anos%20da%20Maria%20Alice%2C%20dia%2028%2F11%2C%20%C3%A0s%2018h." target="_blank" rel="noopener noreferrer">
+            <svg class="icone" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-message-circle"/></svg>
+            Confirmar presença
+          </a>
+          <a class="botao" id="como-chegar" href="https://www.google.com/maps/search/?api=1&amp;query=R.%20Cel.%20Virg%C3%ADlio%20T%C3%A1vora%2C%20376%20-%20Bela%20Cruz%20-%20CE" target="_blank" rel="noopener noreferrer">
+            <svg class="icone" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-map"/></svg>
+            Como chegar
+          </a>
+          <a class="botao" id="salvar-agenda" href="maria-alice-2-anos.ics" download data-ics="maria-alice-2-anos.ics" data-google="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=2+anos+da+Maria+Alice&amp;dates=20261128T180000%2F20261128T200000&amp;ctz=America%2FFortaleza&amp;details=Festa+de+2+anos+da+Maria+Alice.+Vamos+adorar+ter+voc%C3%AA+com+a+gente%21&amp;location=R.+Cel.+Virg%C3%ADlio+T%C3%A1vora%2C+376+-+Bela+Cruz+-+CE">
+            <svg class="icone" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-calendar-plus"/></svg>
+            Salvar na agenda
+          </a>
+        </div>
+        <button class="botao botao--linha botao--largo" id="ver-ar" type="button" hidden>
+          <svg class="icone" aria-hidden="true" viewBox="0 0 24 24"><use href="#i-scan"/></svg>
+          Quer ver a Maria Alice no seu espaço?
+        </button>
+        <p class="cartao__dica" id="dica-3d" role="status">Arraste a Maria Alice para girar.</p>
+
+        <details class="cartao__mais" id="mais-opcoes">
+          <summary>Mais opções</summary>
+          <p class="contagem" id="contagem" data-estado="antes">Faltam 39 dias</p>
+          <p class="cartao__nota-ar" id="nota-ar" hidden>Ver a Maria Alice no seu espaço (realidade aumentada) funciona em iPhone, iPad e celulares Android compatíveis.</p>
+          <div class="campo">
+            <label for="nome-convidado">Seu nome para a mensagem <span class="campo__opcional">(opcional)</span></label>
+            <input id="nome-convidado" name="nome" type="text" maxlength="80" autocomplete="name" enterkeyhint="done" spellcheck="false">
+          </div>
+          <a class="botao botao--linha" id="rsvp-nao" href="https://wa.me/558591919249?text=Ol%C3%A1!%20Infelizmente%20n%C3%A3o%20vou%20conseguir%20ir%20%C3%A0%20festa%20de%202%20anos%20da%20Maria%20Alice.%20Mando%20um%20abra%C3%A7o!" target="_blank" rel="noopener noreferrer">Não vou poder ir</a>
+          <div class="cartao__links">
+            <a class="botao botao--linha" href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=2+anos+da+Maria+Alice&amp;dates=20261128T180000%2F20261128T200000&amp;ctz=America%2FFortaleza&amp;details=Festa+de+2+anos+da+Maria+Alice.+Vamos+adorar+ter+voc%C3%AA+com+a+gente%21&amp;location=R.+Cel.+Virg%C3%ADlio+T%C3%A1vora%2C+376+-+Bela+Cruz+-+CE" target="_blank" rel="noopener noreferrer">Google Agenda</a>
+            <a class="botao botao--linha" href="maria-alice-2-anos.ics" download>Agenda do iPhone e outras</a>
+            <a class="botao botao--linha" href="https://waze.com/ul?q=R.%20Cel.%20Virg%C3%ADlio%20T%C3%A1vora%2C%20376%20-%20Bela%20Cruz%20-%20CE&amp;navigate=yes" target="_blank" rel="noopener noreferrer">Abrir no Waze</a>
+            <button class="botao botao--linha" id="copiar-endereco" type="button" hidden>Copiar endereço</button>
+          </div>
+          <p class="nota">A confirmação só chega quando você envia a mensagem no WhatsApp. Este convite não guarda nem registra respostas.</p>
+          <div class="cartao__extras">
+            <button class="botao--texto" id="rever" type="button" hidden>Ver a história de novo</button>
+            <button class="botao--texto" id="alternar-efeitos" type="button" aria-pressed="false" hidden>Parar animações da floresta</button>
+          </div>
+          <p class="nota">Os botões abrem o WhatsApp, o Google Maps, o Waze ou a sua agenda. Este convite não usa cookies nem coleta dados.</p>
+          <p class="cartao__assinatura">Com carinho, família da Maria Alice</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <div class="aviso" id="aviso" role="status" aria-live="polite"></div>
+
+  <!-- Ícones (Lucide 1.58.0, licença ISC), cor do coelho e formas reutilizadas -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="coelho-pelo" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#BAB6C6"/><stop offset=".6" stop-color="#9E9AAB"/><stop offset="1" stop-color="#8A8698"/>
+      </linearGradient>
+      <symbol id="i-book-open" viewBox="0 0 24 24"><path d="M12 5v16" /><path d="M20.001 19A2 2 0 0022 17V5a2 2 0 00-1.999-2L16 3.002A5 5 0 0012 5a5 5 0 00-4-2H4a2 2 0 00-2 2v12a2 2 0 001.999 2H8a5 5 0 014 2 5 5 0 014-2z" /></symbol>
+      <symbol id="i-calendar-days" viewBox="0 0 24 24"><path d="M8 2v3" /><path d="M16 2v3" /><rect x="3" y="3" width="18" height="18" rx="2" /><path d="M3 9h18" /><path d="M8 13h.01" /><path d="M12 13h.01" /><path d="M16 13h.01" /><path d="M8 17h.01" /><path d="M12 17h.01" /><path d="M16 17h.01" /></symbol>
+      <symbol id="i-calendar-plus" viewBox="0 0 24 24"><path d="M16 18h6" /><path d="M16 2v3" /><path d="M19 15v6" /><path d="M21 11.5V5a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2h8.3" /><path d="M3 9h18" /><path d="M8 2v3" /></symbol>
+      <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol>
+      <symbol id="i-eighth-notes" viewBox="0 0 24 24"><path d="M21 16V3a1 1 0 0 0-1.28-.96l-10 2.917a1 1 0 0 0-.72.96V19" /><circle cx="18" cy="16" r="3" /><circle cx="6" cy="19" r="3" /></symbol>
+      <symbol id="i-map" viewBox="0 0 24 24"><path d="M14.106 5.553a2 2 0 0 0 1.788 0l3.659-1.83A1 1 0 0 1 21 4.619v12.764a1 1 0 0 1-.553.894l-4.553 2.277a2 2 0 0 1-1.788 0l-4.212-2.106a2 2 0 0 0-1.788 0l-3.659 1.83A1 1 0 0 1 3 19.381V6.618a1 1 0 0 1 .553-.894l4.553-2.277a2 2 0 0 1 1.788 0z" /><path d="M15 5.764v15" /><path d="M9 3.236v15" /></symbol>
+      <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /><circle cx="12" cy="10" r="3" /></symbol>
+      <symbol id="i-message-circle" viewBox="0 0 24 24"><path d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719" /></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24"><rect x="14" y="3" width="5" height="18" rx="1" /><rect x="5" y="3" width="5" height="18" rx="1" /></symbol>
+      <symbol id="i-scan" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2" /><path d="M17 3h2a2 2 0 0 1 2 2v2" /><path d="M21 17v2a2 2 0 0 1-2 2h-2" /><path d="M7 21H5a2 2 0 0 1-2-2v-2" /></symbol>
+      <symbol id="i-volume-2" viewBox="0 0 24 24"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z" /><path d="M16 9a5 5 0 0 1 0 6" /><path d="M19.364 18.364a9 9 0 0 0 0-12.728" /></symbol>
+      <symbol id="i-volume-x" viewBox="0 0 24 24"><path d="M11 4.702a.7.7 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.7.7 0 0 0 11 19.298z" /><path d="m16.5 14.5 5-5" /><path d="m16.5 9.5 5 5" /></symbol>
+    </defs>
+  </svg>
+</body>
+</html>
