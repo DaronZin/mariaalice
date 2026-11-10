@@ -143,7 +143,7 @@ export function googleAgendaUrl(config) {
   const p = new URLSearchParams({
     action: 'TEMPLATE',
     text: preencher(e.titulo, v),
-    dates: `${icsData(e.data, e.inicio)}/${icsData(e.data, e.fim)}`,
+    dates: `${icsData(e.data, e.inicio)}/${icsData(e.data, e.fim || e.inicio)}`,
     ctz: e.fusoHorario,
     details: preencher(e.descricaoAgenda, v),
   });
@@ -197,8 +197,8 @@ export function gerarIcs(config, { agora = new Date(), url = '' } = {}) {
   const tz = e.fusoHorario;
   const v = marcadores(config);
   const inicio = zonedTimeToUtc(e.data, e.inicio, tz);
-  const fim = zonedTimeToUtc(e.data, e.fim, tz);
-  if (!(fim > inicio)) throw new Error('O horário de término precisa ser depois do início.');
+  const fim = e.fim ? zonedTimeToUtc(e.data, e.fim, tz) : inicio;
+  if (e.fim && !(fim > inicio)) throw new Error('O horário de término precisa ser depois do início.');
   const offIni = tzOffsetMinutes(tz, inicio);
   const offFim = tzOffsetMinutes(tz, fim);
   const utc = (d) => `${d.getUTCFullYear()}${pad(d.getUTCMonth() + 1)}${pad(d.getUTCDate())}T${pad(d.getUTCHours())}${pad(d.getUTCMinutes())}${pad(d.getUTCSeconds())}Z`;
@@ -225,12 +225,12 @@ export function gerarIcs(config, { agora = new Date(), url = '' } = {}) {
     `UID:${uid}`,
     `DTSTAMP:${utc(agora)}`,
     `DTSTART;TZID=${tz}:${icsData(e.data, e.inicio)}`,
-    `DTEND;TZID=${tz}:${icsData(e.data, e.fim)}`,
     `SUMMARY:${escaparIcs(preencher(e.titulo, v))}`,
     `DESCRIPTION:${escaparIcs(descricao)}`,
   ];
   if (config.local.endereco) linhas.push(`LOCATION:${escaparIcs(config.local.endereco)}`);
   if (url) linhas.push(`URL:${url}`);
+  if (e.fim) linhas.splice(linhas.findIndex((l) => l.startsWith('DTSTART;')) + 1, 0, `DTEND;TZID=${tz}:${icsData(e.data, e.fim)}`);
   linhas.push('STATUS:CONFIRMED', 'TRANSP:OPAQUE', 'END:VEVENT', 'END:VCALENDAR');
   if (offIni !== offFim) {
     // O VTIMEZONE simplificado assume um único deslocamento durante a festa.
@@ -254,7 +254,8 @@ export function contagem(config, agora = new Date()) {
   const hoje = parseDate(hojeTxt);
   const dia = parseDate(e.data);
   const dias = Math.round((Date.UTC(dia.y, dia.mo - 1, dia.d) - Date.UTC(hoje.y, hoje.mo - 1, hoje.d)) / 86400000);
-  const fim = zonedTimeToUtc(e.data, e.fim, tz);
+  // sem término definido, a festa conta como "já aconteceu" só depois do fim do dia
+  const fim = zonedTimeToUtc(e.data, e.fim || '23:59', tz);
   if (agora >= fim) return { estado: 'depois', dias, texto: 'A festa já aconteceu. Obrigado por celebrar com a gente!' };
   if (dias <= 0) return { estado: 'hoje', dias: 0, texto: 'É hoje!' };
   if (dias === 1) return { estado: 'antes', dias, texto: 'É amanhã!' };
@@ -270,9 +271,9 @@ export function validarConfig(config) {
   const avisos = [];
   const e = config.evento || {};
   try { parseDate(e.data); } catch (err) { erros.push(err.message); }
-  try { parseTime(e.inicio); parseTime(e.fim); } catch (err) { erros.push(err.message); }
+  try { parseTime(e.inicio); if (e.fim) parseTime(e.fim); } catch (err) { erros.push(err.message); }
   try { new Intl.DateTimeFormat('en-US', { timeZone: e.fusoHorario }); } catch { erros.push(`Fuso horário inválido: "${e.fusoHorario}"`); }
-  if (!erros.length) {
+  if (!erros.length && e.fim) {
     const ini = zonedTimeToUtc(e.data, e.inicio, e.fusoHorario);
     const fim = zonedTimeToUtc(e.data, e.fim, e.fusoHorario);
     if (!(fim > ini)) erros.push('evento.fim precisa ser depois de evento.inicio.');

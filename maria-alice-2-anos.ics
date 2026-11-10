@@ -15,9 +15,8 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:20261128-maria-alice-2-anos@convite
-DTSTAMP:20261106T180322Z
-DTSTART;TZID=America/Fortaleza:20261128T180000
-DTEND;TZID=America/Fortaleza:20261128T200000
+DTSTAMP:20261110T161919Z
+DTSTART;TZID=America/Fortaleza:20261128T183000
 SUMMARY:2 anos da Maria Alice
 DESCRIPTION:Festa de 2 anos da Maria Alice. Vamos adorar ter você com a ge
  nte!\nConvite: https://mariaalice.cloudflare-ftkbd.workers.dev/

@@ -24,8 +24,9 @@ export default {
     titulo: '{idade} anos da {aniversariante}',
     // Data no formato AAAA-MM-DD e horários no formato HH:MM (24 h).
     data: '2026-11-28',
-    inicio: '18:00',
-    fim: '20:00',
+    inicio: '18:30',
+    // Término opcional: vazio ('') = mostra só o horário de início.
+    fim: '',
     // Fuso horário IANA do local da festa.
     fusoHorario: 'America/Fortaleza',
     // Texto curto que aparece na descrição do evento na agenda.
